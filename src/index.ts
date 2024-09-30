@@ -80,7 +80,7 @@ console.log(`${propiedad1}, ${propiedad2}`);
 
 //Declaracion de enumerados Si hacemos console log nos dara la clave del nombre del Proceso.
 
-enum EstadoTarea {"Pendiente"="P","EnProceso"="Longo", "Terminado"=33};
+enum EstadoTarea {"Pendiente"="P","EnProceso"="E", "Terminado"="T"};
 
 console.log(EstadoTarea.Terminado);
 
@@ -93,7 +93,7 @@ interface Tarea {
     prioridad:number,
     estado:EstadoTarea
 }
-let tarea0:Tarea = {nombre:"Pepito",prioridad:777,estado:EstadoTarea.EnProceso};
+let tarea0:Tarea = {nombre:"Tarea0",prioridad:1,estado:EstadoTarea.EnProceso};
 let tarea1:Tarea = {nombre:"Tarea1",prioridad:2,estado:EstadoTarea.Pendiente};
 
 //Declaracion de Tipos
@@ -125,7 +125,7 @@ console.log(jefe.id);
 // Operador Ternario 
 //condicion ? verdadero : falso
 
-console.log(tarea0.estado == "Longo" ? `La tarea ${tarea0.nombre} se encuentra en ejecucion ` : `La tarea ${tarea0.nombre} no se encuentra en ejecucion`)
+console.log(tarea0.estado == "E" ? `La tarea ${tarea0.nombre} se encuentra en ejecucion ` : `La tarea ${tarea0.nombre} no se encuentra en ejecucion`)
 
 
 
@@ -150,13 +150,13 @@ if (tarea1 != tarea0){
 
 
 switch (tarea1.estado){
-    case "Longo":
+    case "E":
     console.log("Tarea en proceso");
     break;
     case "P":
         console.log("tarea Pendiente");
         break;
-    case 33:
+    case "T":
         console.log("tarea terminada");
 
 
@@ -173,3 +173,96 @@ let numero1:number  = 70;
 console.log("Se a producido un error",error);
 
 }
+
+
+//Bucles
+
+let listaEmpleado: Empleado[] = [
+
+{
+    nombre: "Manolo",
+    edad: 18,
+    sueldo: 1000
+
+
+
+},
+
+{
+    nombre: "Pepe",
+    edad: 24,
+    sueldo: 2000
+
+},
+
+{
+    nombre: "Paco",
+    edad: 40,
+    sueldo: 5000
+
+}
+
+]
+
+
+//Declaracion Bucle For each
+listaEmpleado.forEach(
+    (empleado: Empleado, index: number)=> {
+
+        console.log(`${index} ${empleado.nombre}`)
+
+}
+
+
+);
+
+// Declaracion Forin utilizado para cadenas de texto
+
+for (const estado in tarea1) {
+    if (Object.prototype.hasOwnProperty.call(tarea1, estado)) {
+        console.log(`${estado}: ${tarea1[estado as keyof Tarea]}`);
+        
+    }
+}
+
+
+//Declaracion For
+
+for (let index = 0; index < listaEmpleado.length; index++) {
+    const empleado = listaEmpleado[index];
+    console.log(`${index} ${empleado.nombre}`)
+}
+
+
+//Bucles While
+
+while (tarea1.estado !== EstadoTarea.EnProceso){
+    if(tarea1.prioridad<=5){
+
+    tarea1.estado = EstadoTarea.EnProceso;
+
+        break;
+}else{
+tarea1.prioridad++;
+
+}
+}
+
+//do while se ejecuta al menos una vez
+
+do{
+
+
+if(tarea0.prioridad<=5){
+
+    tarea1.estado = EstadoTarea.Terminado;
+
+        break;
+}else{
+tarea0.prioridad++;
+
+}
+
+}while(tarea0.estado!==EstadoTarea.Terminado)
+
+

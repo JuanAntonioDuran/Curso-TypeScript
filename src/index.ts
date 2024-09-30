@@ -266,3 +266,193 @@ tarea0.prioridad++;
 }while(tarea0.estado!==EstadoTarea.Terminado)
 
 
+//Funciones
+
+/**
+ * Funcion que muestra un saludo por consola
+ */
+function saludar(){
+
+    let nombre:String = "Juan"
+
+    console.log("Hola "+nombre);
+}
+
+
+//Ejecutar funciones
+
+saludar();
+
+/**
+ * 
+ * @param nombre nombre de una persona a saludar
+ */
+function saludar1(nombre:String){
+
+    console.log("Hola "+nombre);
+
+}
+
+saludar1("pepe");
+
+//Funcion con valor por defecto
+
+function despedir(nombre:String = "Pepe"){
+
+    console.log(`Adios ${nombre}!`);
+
+
+}
+
+despedir()//Adios Pepe
+despedir("Anastasio")//Adios Anastasio
+
+
+//Funcion con valor opcional
+
+function despedirOpcional (nombre?:String){
+
+if(nombre){
+    console.log("Adios"+ nombre)
+}else{
+    console.log("Chaito")
+}
+
+
+}
+
+//Funcion de varios valores
+
+function variosTipos (a:String | number){
+    
+    if(typeof{a}=='string'){
+
+        console.log("A es un estring")
+    }else{
+        console.log("A es un number")
+    }
+}
+ 
+
+//funciones con return 
+
+function ejemploReturn(nombre:string, apellidos:string): string |number{
+
+    return `${nombre} ${apellidos}`;
+
+
+}
+
+var nombreComp = ejemploReturn("Martin","San Jose");
+
+
+
+
+function ejemploMultiple (...nombres:string[]){
+
+    nombres.forEach((nombre) =>{
+
+        console.log(nombre)
+
+    }
+
+);
+
+
+}
+
+
+ejemploMultiple("MArtin", "Pepe", "Juan");
+
+
+//Arrow Functions
+
+let empleado: Empleado ={
+
+    nombre: "Juanjo",
+    edad: 4,
+    sueldo: 56
+
+}
+
+
+const mostrarEmpleado  = (empleado: Empleado) => `${empleado.nombre} tiene ${empleado.edad} años`
+
+mostrarEmpleado(empleado);
+
+
+const datosEmpleado = (empleado: Empleado):string => {
+
+    if(empleado.edad>20){
+        return `Empleado ${empleado.nombre} Puede trabajar`
+
+    }else{
+        return `Empleado ${empleado.nombre} no puede trabajar`
+    }
+    mostrarEmpleado(empleado)
+}
+
+
+datosEmpleado(empleado);
+
+
+
+//Assync Functions
+
+
+async function ejemploAssync (): Promise<string>{
+
+    await console.log("Tarea a completar antes de seguir con la secuencia de instrucciones")
+    console.log("Completado");
+    return "Completado";
+}
+
+
+ejemploAssync().then((respuesta)=>{
+
+    console.log("Respuesta", respuesta)
+})
+
+//Generators
+
+
+function* ejemploGenerator(){
+
+    let index = 0;
+
+    while(index < 5){
+    yield index++;
+}
+
+}
+
+//Guardamos la funcion generadora en una variable
+
+let generadora = ejemploGenerator();
+
+//Accedemos a los valores emitidos
+
+console.log(generadora.next().value);//Accedemos al siguiente valor
+
+//Workers 
+
+function* watcher(valor: number){
+
+     yield valor;
+     yield* worker(valor);
+    yield valor +10;
+}
+
+
+
+function* worker(valor: number){
+yield valor +1;
+yield valor +2;
+yield valor +3;
+
+}
+
+let generatorSaga = watcher(0);
+
+console.log(generatorSaga.next().value);
+

@@ -217,14 +217,7 @@ listaEmpleado.forEach(
 
 );
 
-// Declaracion Forin utilizado para cadenas de texto
 
-for (const estado in tarea1) {
-    if (Object.prototype.hasOwnProperty.call(tarea1, estado)) {
-        console.log(`${estado}: ${tarea1[estado as keyof Tarea]}`);
-        
-    }
-}
 
 
 //Declaracion For
@@ -389,12 +382,12 @@ let empleado: Empleado ={
 }
 
 
-let mostrarEmpleado  = (empleado: Empleado) => console.log(`${empleado.nombre} tiene ${empleado.edad} años`)
+let mostrarEmpleado  = (empleado: Empleado) => {console.log(`${empleado.nombre} tiene ${empleado.edad} años`)}
 
 mostrarEmpleado(empleado);
 
 
-const datosEmpleado = (empleado: Empleado):string => {
+let datosEmpleado = (empleado: Empleado):string => {
 
     if(empleado.edad>20){
         return `Empleado ${empleado.nombre} Puede trabajar`

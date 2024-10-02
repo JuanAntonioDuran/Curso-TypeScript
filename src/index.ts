@@ -207,6 +207,7 @@ let listaEmpleado: Empleado[] = [
 
 //Declaracion Bucle For each
 listaEmpleado.forEach(
+    //funcion Flecha 
     (empleado: Empleado, index: number)=> {
 
         console.log(`${index} ${empleado.nombre}`)
@@ -293,7 +294,7 @@ function saludar1(nombre:String){
 
 }
 
-saludar1("pepe");
+saludar1("Eduardo");
 
 //Funcion con valor por defecto
 
@@ -321,32 +322,43 @@ if(nombre){
 
 }
 
+despedirOpcional("Juani");
 //Funcion de varios valores
 
 function variosTipos (a:String | number){
     
     if(typeof{a}=='string'){
 
-        console.log("A es un estring")
+        console.log("A es un string")
     }else{
         console.log("A es un number")
     }
 }
  
 
-//funciones con return 
+//funciones con return De diferentes valores para una sola variabe
 
-function ejemploReturn(nombre:string, apellidos:string): string |number{
+function ejemploReturn(nombre:string, apellidos:string, direccion: string|number){
 
-    return `${nombre} ${apellidos}`;
+    return `${nombre} ${apellidos} ${direccion}`;
 
 
 }
 
-var nombreComp = ejemploReturn("Martin","San Jose");
+
+var nombreComp = ejemploReturn("Pepe","San Jose",4);
 
 
 
+// funciones anonimas 
+
+
+let fanonima = function () {console.log("Hola Mundo")}
+
+fanonima();
+
+
+//Funciones de multiples Parametros
 
 function ejemploMultiple (...nombres:string[]){
 
@@ -362,7 +374,8 @@ function ejemploMultiple (...nombres:string[]){
 }
 
 
-ejemploMultiple("MArtin", "Pepe", "Juan");
+//Se le puede pasar un array con el ...NombreArray
+ejemploMultiple("Martin", "Pepe", "Juan");
 
 
 //Arrow Functions
@@ -376,7 +389,7 @@ let empleado: Empleado ={
 }
 
 
-const mostrarEmpleado  = (empleado: Empleado) => `${empleado.nombre} tiene ${empleado.edad} años`
+let mostrarEmpleado  = (empleado: Empleado) => console.log(`${empleado.nombre} tiene ${empleado.edad} años`)
 
 mostrarEmpleado(empleado);
 

@@ -419,7 +419,65 @@ ejemploAssync().then((respuesta)=>{
     console.log("Respuesta", respuesta)
 })
 
+
+//Ejemplo asincrona 
+
+
+async function asincrona() {
+    let suma:number =0;
+    for (let i=0; i<10000;i++){
+        suma+=i;
+    }
+    
+    return suma;
+
+} 
+
+asincrona().then((data:number) => {console.log(`El resultado assync es ${data}`)});
+
+console.log("Linea de codigo posterior a asincrona")
+
+
+type University = {
+    domains : string[],
+    alpha_two_code : string,
+    name : string
+}
+
+async function getDataUniversity() : Promise<University []>{
+
+    const data = await fetch ("http://universities.hipolabs.com/search?country=Spain");
+    let respuesta: Promise<University[]> = await data.json() as Promise<University[]>;
+    return respuesta;
+
+}
+
+
+getDataUniversity().then((data:University[]) => {
+
+for (let i =0; i<data.length; i++){
+    console.log("Universidad"+data[i].name)
+}
+    
+
+});
+
+
+
 //Generators
+
+
+function* fgeneradora ():Generator<Empleado>{
+    
+    for(let empleado in listaEmpleado){
+        yield listaEmpleado[empleado];
+    }
+
+}
+
+let funciongen = fgeneradora();
+//Devuelve un Empleado
+console.log(funciongen.next());
 
 
 function* ejemploGenerator(){
@@ -445,7 +503,7 @@ console.log(generadora.next().value);//Accedemos al siguiente valor
 function* watcher(valor: number){
 
      yield valor;
-     yield* worker(valor);
+    yield* worker(valor);
     yield valor +10;
 }
 
@@ -462,3 +520,35 @@ let generatorSaga = watcher(0);
 
 console.log(generatorSaga.next().value);
 
+/**
+ * C
+ * @param a 
+ * @param b 
+ * @returns 
+ * 
+ * CallBack
+ */
+
+
+let suma = function suma (a:number, b:number){
+return a+b;
+
+}
+
+let resta = function resta (a:number, b:number){
+    return a-b;
+    
+    }
+
+
+function opera(x:number,y:number,funcion:(a:number,b:number)=>number){
+    
+    return funcion(x,y);
+
+}
+
+console.log("Suma "+opera(12,34,suma));//Una funcion pasa una funcion y recoje los parametors
+opera(34,23,resta);
+
+
+console.log("HOla aqui estoy")

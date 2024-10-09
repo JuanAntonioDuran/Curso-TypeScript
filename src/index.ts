@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie'
+
 console.log("Hola Mundo");
 
 //Declaracion de Variables
@@ -619,3 +621,129 @@ function saludarSobrecarga (nombre:string ,apellido:string , edad:string):string
   }
 
   console.log(saludarSobrecarga("Pepe","Juan","45"));
+
+
+  //-----------------Ejercicio 2 Tarea 1.1-------------------------
+
+  interface TareaE1  {
+    id: string;
+    titulo: string;
+   
+}
+
+function almacenar(type: string = "SessionStorage", key: string, data: TareaE1[]) {
+    console.log("El método almacenar se está ejecutando...");
+
+    if (type == "session") {
+        sessionStorage.setItem(key, data.toString()); 
+        console.log("Se ha guardado en sessionStorage");
+    } else if (type == "local") {
+        localStorage.setItem(key,data.toString());
+        console.log("Se ha guardado en localStorage");
+    } else {
+        console.log("ERROR: No se pudo guardar");
+    }
+}
+
+// -----------Ejercicio 3 Tarea 1.1--------------
+
+let ejecucion1: TareaE1 = {
+    id: "7638232",
+    titulo: "Ejecucion1",
+   
+};
+
+let ejecucion2: TareaE1 = {
+    id: "83492024",
+    titulo: "Ejecucion2",
+   
+};
+
+let ejecucion3: TareaE1 = {
+    id: "342428901",
+    titulo: "Ejecucion3",
+
+};
+
+let arrayTarea: TareaE1[] = [ejecucion1, ejecucion2, ejecucion3];
+
+almacenar("session", "datos", arrayTarea);
+almacenar("local", "datos", arrayTarea);
+
+
+//-----------Ejercicio 4---------------------
+
+function devolver(type: string = "session", key: string) {
+    console.log("El método devolver se está ejecutando...");
+
+    if (type == "session") {
+      
+        let dato:string | null = sessionStorage.getItem(key);
+        if (dato!=null){
+            return dato;
+        }
+           
+
+    } else if (type == "local") {
+       
+        let dato:string | null = localStorage.getItem(key);
+        if (dato!=null){
+            return dato;
+        }
+         
+            
+     
+    } else {
+        console.log("ERROR: No se pudieron mostrar los datos");
+    }
+}
+
+
+//------------------Ejercicio 5--------------------------
+
+console.log(devolver("session","datos"));
+console.log(devolver("local","datos"));
+
+
+//--------------------Ejercicio 6--------------------------
+
+
+function eliminar(type: string, key: string){
+    console.log("Ejecutando funcion Eliminar.....")
+    if (type === "session") {
+        sessionStorage.removeItem(key);
+       
+    } else if (type === "local") {
+        localStorage.removeItem(key);
+        
+    } else {
+        console.log("ERROR: No se pudo eliminar");
+    }
+
+
+}
+
+
+eliminar("session","datos");
+eliminar("local","datos");
+
+
+//-----------------------------Ejercicio 7-------------------------
+
+
+Cookies.set('nombre', 'Juan_Antonio', {expires:7,path:"/"});
+Cookies.set("apellido","Duran_Fernandez",{expires:2});
+Cookies.set("correo","jdurfer0405@iescarrillo.es",{expires:4});
+
+
+console.log(Cookies.get('nombre'));
+console.log(Cookies.get('apellido'));
+console.log(Cookies.get('correo'));
+
+Cookies.remove('nombre');
+Cookies.remove('apellido');
+Cookies.remove('correo');
+
+console.log(Cookies.get('nombre'));
+console.log(Cookies.get('apellido'));
+console.log(Cookies.get('correo'));

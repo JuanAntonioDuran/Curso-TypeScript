@@ -490,6 +490,46 @@ function* ejemploGenerator(){
 
 }
 
+function* fgeneradora2 (): Generator<String>{
+yield "hola";
+yield "mundo";
+yield "IES";
+
+}
+
+let llamadafGen2 = fgeneradora2();
+
+console.log(llamadafGen2.next);
+
+//Funciones asincronas generadoras
+
+type WebPage = {
+    Name:String,
+    Domain:String,
+    Descripcion:string
+}
+
+
+async function* obtenerDatosWeb(): AsyncGenerator<WebPage> {
+    
+    let peticion = await fetch("https://haveibeenpwned.com/api/v2/breaches");
+    let datos: WebPage[] = await peticion.json() as WebPage[];
+
+        for(let i=0; i<datos.length ;i++){
+            yield datos[i];
+
+        }
+//For each no se puede usar dentro del callback
+
+}
+let datosWebPage = obtenerDatosWeb();
+
+datosWebPage.next().then(({value,done})=> {console.log(`${value.Name}-${value.Descripcion}`)}); 
+
+
+
+
+
 //Guardamos la funcion generadora en una variable
 
 let generadora = ejemploGenerator();
@@ -552,3 +592,30 @@ opera(34,23,resta);
 
 
 console.log("HOla aqui estoy")
+
+
+//sobrecarga de funciones
+
+
+function  saludarSobrecarga(nombre:string):string;
+function saludarSobrecarga (nombre:string,apellido:string):string;
+function saludarSobrecarga (nombre:string ,apellido:string , edad:string):string;
+
+  function saludarSobrecarga (nombre:string, apellido?:string, edad?:string){
+
+    let saludo = `Hola ${nombre}`;
+
+    if (apellido != undefined){
+
+        saludo = saludo+apellido;
+
+    }
+    if(edad != undefined){
+        saludo = saludo+edad;
+    }
+
+    return saludo
+
+  }
+
+  console.log(saludarSobrecarga("Pepe","Juan","45"));

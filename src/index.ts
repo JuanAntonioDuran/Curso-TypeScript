@@ -446,23 +446,17 @@ type University = {
     name : string
 }
 
-async function getDataUniversity() : Promise<University []>{
+//async function getDataUniversity() : Promise<University []>{
 
-    const data = await fetch ("http://universities.hipolabs.com/search?country=Spain");
-    let respuesta: Promise<University[]> = await data.json() as Promise<University[]>;
-    return respuesta;
-
-}
-
-
-getDataUniversity().then((data:University[]) => {
-
-for (let i =0; i<data.length; i++){
-    console.log("Universidad"+data[i].name)
-}
-    
-
-});
+  //  const data = await fetch ("http://universities.hipolabs.com/search?country=Spain");
+    //let respuesta: Promise<University[]> = await data.json() as Promise<University[]>;
+   // return respuesta;
+//}
+//getDataUniversity().then((data:University[]) => {
+//for (let i =0; i<data.length; i++){
+// console.log("Universidad"+data[i].name)
+//}
+//});
 
 
 
@@ -747,3 +741,49 @@ Cookies.remove('correo');
 console.log(Cookies.get('nombre'));
 console.log(Cookies.get('apellido'));
 console.log(Cookies.get('correo'));
+
+
+
+
+//----------------Clase 10/10/2024--------------------
+
+//ACCEDER A DOCUMENTOS DEL DOM.
+
+let input = document.getElementById("input-contenido") as HTMLInputElement;
+
+let btnNuevoContenido = document.getElementsByName("btn-add-content")[0] as HTMLButtonElement;
+
+let div = document.getElementsByTagName("div");
+
+console.log(input.value);//Valor Vacio por que el input esta vacio
+console.log(btnNuevoContenido);
+console.log(div);
+
+let elementosOl = document.querySelector("#lista-contenidos") as HTMLOListElement;
+
+let elementosLi = document.getElementById("lista-contenidos")?.getElementsByTagName("li");
+
+let elementosLi2 = document.querySelectorAll("ol[id='lista-contenidos'] > li");
+
+console.log(elementosLi);
+console.log(elementosLi2);
+
+//CREACION DE ELEMENTOS
+
+let nuevoElemento:HTMLLIElement = document.createElement("li");
+nuevoElemento.innerText = "Nuevo Elemento"
+
+elementosOl.appendChild(nuevoElemento);
+elementosOl.append(nuevoElemento);
+elementosOl.prepend(nuevoElemento);
+
+/**
+ * clic
+ * mause hover
+ */
+btnNuevoContenido.addEventListener("click",(event) =>{
+
+//TODO:
+console.log("Usuario hace click en el boton")
+
+})

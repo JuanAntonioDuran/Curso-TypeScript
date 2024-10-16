@@ -786,4 +786,37 @@ btnNuevoContenido.addEventListener("click",(event) =>{
 //TODO:
 console.log("Usuario hace click en el boton")
 
-})
+
+});
+
+let divisor:HTMLDivElement = document.getElementsByTagName("div")[0] as HTMLDivElement;
+
+
+
+
+divisor.addEventListener('click',(evento:Event)=>{
+
+switch (evento.type) {
+    case "click":
+        console.log("Ha echo clic")
+        break;
+    case "dblclick":
+        console.log("Ha echo double clic")
+        break;
+    default:
+        break;
+}
+
+});
+
+let elementosOL:HTMLOListElement = document.getElementById("lista-ontenidos") as HTMLOListElement
+
+elementosOL.children;//Devuelve array de objetos
+
+
+
+/**
+ * Ejercicio practicar ejercicio que esta en el moodle de jose pero añadir delete
+ */
+
+

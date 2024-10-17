@@ -811,8 +811,47 @@ switch (evento.type) {
 
 let elementosOL:HTMLOListElement = document.getElementById("lista-ontenidos") as HTMLOListElement
 
-elementosOL.children;//Devuelve array de objetos
+let elemento: HTMLLIElement = elementosOL.children[0] as HTMLLIElement;
 
+elementosOL.firstElementChild;
+elementosOL.lastElementChild;
+elementosOL.nextElementSibling;
+
+
+
+elementosOL.children[0];//Devuelve array de objetos
+
+//Enlace a usar
+//https://dog.ceo/api/breeds/image/random
+
+
+type Perro = {
+message:string,
+status:string;
+
+}
+
+
+async function obtenerDatosWeb2():Promise<Perro> {
+    
+    let peticion = await fetch("https://dog.ceo/api/breeds/image/random");
+    let datos:Perro = await peticion.json() as Perro;
+
+
+    return datos;
+}
+
+
+
+let funcAsy = obtenerDatosWeb2();
+
+funcAsy.then((prueba:Perro)=>{
+    console.log(`${prueba.message} -${prueba.status}`)
+ let image = document.createElement("img") as HTMLImageElement
+    image.src=prueba.message
+    let body = document.getElementsByTagName("body")[0] as HTMLBodyElement
+    body.appendChild(image);
+});
 
 
 /**

@@ -811,51 +811,93 @@ switch (evento.type) {
 
 let elementosOL:HTMLOListElement = document.getElementById("lista-ontenidos") as HTMLOListElement
 
-let elemento: HTMLLIElement = elementosOL.children[0] as HTMLLIElement;
 
-elementosOL.firstElementChild;
-elementosOL.lastElementChild;
-elementosOL.nextElementSibling;
-
-
-
-elementosOL.children[0];//Devuelve array de objetos
+//let elemento:HTMLLIElement = elementosOL.children[0] as HTMLLIElement;
+//elementosOL.firstElementChild;
+//elementosOL.lastElementChild;
+//elementosOL.nextElementSibling;
+//elementosOL.children[0];//Devuelve array de objetos
 
 //Enlace a usar
 //https://dog.ceo/api/breeds/image/random
 
 
-type Perro = {
-message:string,
-status:string;
+// https://dog.ceo/api/breeds/image/random
 
+
+type Perros = {
+    message:string,
+    status:string
 }
 
+async function obtenerDatosPerros():Promise<Perros>{
+    let peticion = await fetch("https://dog.ceo/api/breeds/image/random")
+    let datos = await peticion.json() as Perros;
 
-async function obtenerDatosWeb2():Promise<Perro> {
-    
-    let peticion = await fetch("https://dog.ceo/api/breeds/image/random");
-    let datos:Perro = await peticion.json() as Perro;
-
-
-    return datos;
+  return datos;
 }
 
+//Es asincrona por lo que hay que trabajar dentro del then() con lo que hayamos recogido, ya que si no
+//el codigo se sigue ejecutando, pero la peticion asincrona aun no ha sido completada.
+let datosPerros = obtenerDatosPerros();
 
+datosPerros.then((prueba:Perros)=>{
+    console.log(`${prueba.message} - ${prueba.status}`)
 
-let funcAsy = obtenerDatosWeb2();
-
-funcAsy.then((prueba:Perro)=>{
-    console.log(`${prueba.message} -${prueba.status}`)
- let image = document.createElement("img") as HTMLImageElement
-    image.src=prueba.message
+    let imagenPerro = document.createElement("img") as HTMLImageElement;
+    imagenPerro.src = prueba.message
     let body = document.getElementsByTagName("body")[0] as HTMLBodyElement
-    body.appendChild(image);
-});
+    body.appendChild(imagenPerro);
+}) ;
 
 
 /**
  * Ejercicio practicar ejercicio que esta en el moodle de jose pero añadir delete
  */
+
+// Crear los elementos HTML
+let addButton = document.createElement("button");
+let removeButton = document.createElement("button");
+let lista1 = document.createElement("ul");
+let lista2 = document.createElement("ul");
+
+
+//Añadir Al HTML.
+document.body.appendChild(addButton);
+document.body.appendChild(removeButton);
+document.body.appendChild(lista1);
+document.body.appendChild(lista2);
+
+function addDogToList1() {
+    obtenerDatosPerros().then((perro: Perros) => {
+        console.log(`Imagen de perro añadida: ${perro.message}`);
+        
+        let listItem = document.createElement("li");
+        let imagenPerro = document.createElement("img") as HTMLImageElement;
+        imagenPerro.src = perro.message;
+        imagenPerro.width = 100; // Ajustar tamaño de imagen
+
+        listItem.appendChild(imagenPerro);
+        lista1.appendChild(listItem);
+
+        // Evento para mover a lista2 al hacer doble clic
+        listItem.addEventListener("dblclick", () => {
+            lista2.appendChild(listItem);
+            console.log("Perro movido a lista 2");
+        });
+    });
+}
+
+// Función para eliminar el último perro de la lista 1
+function removeDogFromList1() {
+    if (lista1.lastChild) {
+        console.log("Perro eliminado de lista 1");
+        lista1.removeChild(lista1.lastChild);
+    }
+}
+
+// Eventos para los botones
+addButton.addEventListener("click", addDogToList1);
+removeButton.addEventListener("click", removeDogFromList1);
 
 

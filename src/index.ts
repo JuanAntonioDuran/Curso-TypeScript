@@ -901,3 +901,10 @@ addButton.addEventListener("click", addDogToList1);
 removeButton.addEventListener("click", removeDogFromList1);
 
 
+//----------------Clase 21/10/2024-------------------
+
+
+
+
+
+
